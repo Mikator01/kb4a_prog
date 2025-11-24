@@ -1,4 +1,4 @@
-# Úlohy - zápis do souboru
+import random# Úlohy - zápis do souboru
 Úlohy jsou seřazeny *přibližně* od jednodušších po složitější.
 
 ---
