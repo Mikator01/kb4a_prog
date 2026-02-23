@@ -19,9 +19,9 @@ with open("moje kódy\data.csv", "r", encoding="utf-8") as file:
         calories = float(row["Calories"])
 
         #kategorie z calories
-        if calories < 350:
+        if calories < 240:
             category = 0
-        elif calories < 450:
+        elif calories < 350:
             category = 1
         else:
             category = 2
@@ -29,21 +29,18 @@ with open("moje kódy\data.csv", "r", encoding="utf-8") as file:
         X.append([duration, pulse, maxpulse])
         Y.append(category)
 
-rows = len(X)
-split = round(0.8 * rows)
-
-trening_X = X[:split]
-trening_Y = Y[:split]
-
-test_X = X[split:]
-test_Y = Y[split:]
+trening_X, test_X, trening_Y, test_Y  = train_test_split(
+        X, Y,
+        test_size=0.2,
+        random_state=42)
 
 neural_network = MLPClassifier(
-    hidden_layer_sizes=(8, 4),
+    hidden_layer_sizes=(22, 8),
     activation="relu",
-    max_iter=2000,
+    max_iter=3500,
     verbose = True,
-    random_state=4
+    random_state=4,
+    n_iter_no_change=20
 )
 
 neural_network.fit(trening_X, trening_Y)
